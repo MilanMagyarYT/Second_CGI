@@ -1,0 +1,31 @@
+.sidebar {
+  height: calc(100vh - 60px); /* Full height minus the navbar height */
+  width: 250px; /* Width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Below the navbar */
+  top: 60px; /* Height of the navbar */
+  left: 0;
+  background-color: #111; /* Dark background for the sidebar */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px; /* Space for the first item */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.5); /* Shadow on the right edge */
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ddd; /* Light text color for visibility */
+  display: block;
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.sidebar a:hover {
+  color: #fff; /* White text on hover */
+  background-color: #666; /* Darker background on hover */
+}
+
+/* Style for the sidebar icons if you have them */
+.sidebar-icon {
+  margin-right: 10px; /* Space between icon and text */
+}
