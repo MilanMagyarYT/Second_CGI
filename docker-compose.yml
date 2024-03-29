@@ -3,24 +3,35 @@ version: "3.8"
 services:
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/backend
+      - trained-models:/backend/trained_models
     networks:
       - app-network
 
   frontend:
     build:
-      context: .
-      dockerfile: frontend/Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    networks:
+      - app-network
+
+  ml_model:
+    build: ./ml_model
+    volumes:
+      - ./ml_model:/usr/src/app
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  trained-models:

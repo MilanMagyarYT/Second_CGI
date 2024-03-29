@@ -12,3 +12,6 @@ class SensorDataSchema(SensorDataBaseSchema):
 
 class SensorDataCreateSchema(SensorDataBaseSchema):
     pass
+
+class PredictionSchema(BaseModel):
+    prediction: int
