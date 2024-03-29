@@ -1,0 +1,67 @@
+.navbar {
+    background-color: #fff; /* White background for the navbar */
+    height: 60px; /* Adjust as needed */
+    width: 100%;
+    position: fixed; /* Fixed at the top */
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    z-index: 2; /* Above the sidebar */
+  }
+  
+  .logo-container {
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-image {
+    height: 40px; /* Adjust as needed, but should be less than the navbar height */
+    width: auto; /* To maintain aspect ratio */
+  }
+  
+  .navbar-title {
+    margin-left: 20px;
+    font-size: 1.5rem; /* Or size as per design */
+    color: #333333; /* Dark text color for contrast */
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+  }
+  
+  /*.notification-emoji {
+    padding-left: 10px;
+    margin-right: 10px;
+  }*/
+  
+  .user-name {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .notification-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0 10px; /* Adjust the margin as needed */
+    color: inherit; /* Inherits the color from the parent element */
+    /* Adjust for vertical alignment */
+    position: relative;
+    top: 2px; /* Push it down a bit, adjust as needed */
+  }
+  
+  /* You might want to add styles for when the button is focused or hovered */
+  .notification-button:hover,
+  .notification-button:focus {
+    outline: none; /* Removes the default outline */
+    /* Add any hover effects you want */
+  }
+  

@@ -1,0 +1,15 @@
+/*App.css*/
+.App {
+  text-align: center;
+}
+
+/* ... other styles ... */
+
+/* Add this new style for the content area */
+.App-content {
+  margin-left: 250px; /* Sidebar width */
+  margin-top: 60px; /* Navbar height */
+  height: calc(100vh - 60px); /* Full height minus navbar */
+  overflow: auto;
+  /* Additional styles for your content area */
+}
