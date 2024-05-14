@@ -1,0 +1,62 @@
+.page-title {
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 48px;
+    margin-left: 0; /* Adjust this value as needed */
+    padding-right: 800px; /* Adjust this value as needed */
+    margin-top: 55px;  /* Added top margin */
+}
+
+.sensor-graph-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.sensor-graph-container {
+    position: relative; /* Needed to position the child absolutely */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.go-back-button {
+    position: absolute; /* Position the button absolutely */
+    left: 0; /* Align to the left side */
+    top: 0; /* Align to the top */
+    padding: 10px 25px;
+    margin: 15px 20px;
+    font-size: 16px;
+    background-color: #5236AB;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+  
+  .go-back-button:hover {
+    background-color: #CBC3E6;  /* Darker shade of green */
+    color: #200A58;
+  }
+  
+  
+  .go-back-button:focus {
+    outline: none; /* Removes default outline */
+    background-color: #AFA3D8; 
+    color: #200A58;
+  }
+  
+  .go-back-button:active {
+    background-color: #200A58; /* Even darker shade for Pressed */
+    text-decoration: underline;
+    color: white;
+  }
+  

@@ -1,6 +1,6 @@
 .navbar {
     background-color: #fff; /* White background for the navbar */
-    height: 60px; /* Adjust as needed */
+    height: 70px; /* Adjust as needed */
     width: 100%;
     position: fixed; /* Fixed at the top */
     top: 0;
@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
     z-index: 2; /* Above the sidebar */
   }
@@ -18,16 +18,11 @@
     display: flex;
     align-items: center;
   }
+
   
   .logo-image {
-    height: 40px; /* Adjust as needed, but should be less than the navbar height */
+    height: 35px; /* Adjust as needed, but should be less than the navbar height */
     width: auto; /* To maintain aspect ratio */
-  }
-  
-  .navbar-title {
-    margin-left: 20px;
-    font-size: 1.5rem; /* Or size as per design */
-    color: #333333; /* Dark text color for contrast */
   }
   
   .user-info {
@@ -36,21 +31,22 @@
     padding-right: 40px;
   }
   
-  /*.notification-emoji {
-    padding-left: 10px;
-    margin-right: 10px;
-  }*/
-  
   .user-name {
-    font-size: 1rem;
-    color: #333;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    padding-right: 20px;
+    padding-left: 10px;
+    border-left: 1px solid #050505; /* The bar itself */
+    color: #000000;
+    display: flex;
   }
 
   .notification-button {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
+    padding-right: 10px;
     margin: 0 10px; /* Adjust the margin as needed */
     color: inherit; /* Inherits the color from the parent element */
     /* Adjust for vertical alignment */
@@ -65,3 +61,38 @@
     /* Add any hover effects you want */
   }
   
+  .nav-links {
+    margin-left: 0px;
+    margin-right: 350px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    display: flex; /* Align the links in a row */
+   /* Center links vertically */
+  }
+  
+  .nav-links a:hover {
+    color: #ebeef2; /* White text on hover */
+  }
+  
+  .navbar-title {
+    font-weight: 400; /* regular */
+    font-size: 20px;
+    line-height: 28px;
+    margin-left: 10px; /* Adjust space between bar and title */
+    padding-left: 10px; /* Space for the bar */
+    border-left: 1px solid #bbb7b7; /* The bar itself */
+}
+
+
+
+.nav-links a {
+    font-weight: 700; /* bold */
+    font-size: 18px;
+    line-height: 24px;
+    color: #0a0a0a; /* Adjust the color to match the design */
+    text-decoration: none;
+    padding: 10px 15px;
+    
+    /* ...existing styles if any... */
+}
