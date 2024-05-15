@@ -15,7 +15,7 @@ function SearchBar() {
     return (
         <div className="search-container">
             <FontAwesomeIcon icon={faSearch} className="search-icon" />
-            <input
+            <input 
                 type="text"
                 className={`search-input ${isError ? 'error' : ''}`}
                 value={inputValue}
