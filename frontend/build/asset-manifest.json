@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c3d1de96.css",
+    "main.js": "/static/js/main.c0f140ef.js",
+    "static/js/453.d855a71b.chunk.js": "/static/js/453.d855a71b.chunk.js",
+    "static/media/CGI_Logo.png": "/static/media/CGI_Logo.d070d8114da625f06ab3.png",
+    "static/media/5. Cornerstone pattern - gradiant B background.svg": "/static/media/5. Cornerstone pattern - gradiant B background.27d2c092a8311a8d01fc.svg",
+    "index.html": "/index.html",
+    "main.c3d1de96.css.map": "/static/css/main.c3d1de96.css.map",
+    "main.c0f140ef.js.map": "/static/js/main.c0f140ef.js.map",
+    "453.d855a71b.chunk.js.map": "/static/js/453.d855a71b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c3d1de96.css",
+    "static/js/main.c0f140ef.js"
+  ]
+}
