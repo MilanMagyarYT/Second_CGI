@@ -6,9 +6,21 @@ import Navbar from './Navbar';
 import HomePage from './HomePage';
 import SensorPage from './SensorPage';
 import SensorGraph from './SensorGraph'; 
+import { MsalAuthenticationTemplate, useIsAuthenticated } from "@azure/msal-react";
+import { InteractionType } from "@azure/msal-browser";
+import { loginRequest } from "./authConfig";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import from react-router-dom
 
 function App() {
+  const isAuthenticated = useIsAuthenticated();
+
+  if (!isAuthenticated) {
+      return (
+          <MsalAuthenticationTemplate interactionType={InteractionType.Redirect} authenticationRequest={loginRequest}>
+              <div>Loading...</div>
+          </MsalAuthenticationTemplate>
+      );
+  }
   return (
     <Router> {/* Wrap your application in a Router component */}
       <div className="App">
