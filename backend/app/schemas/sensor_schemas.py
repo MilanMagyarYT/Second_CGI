@@ -1,17 +1,64 @@
 from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
+from typing import Optional, List
 
-class SensorDataBaseSchema(BaseModel):
-    timestamp: datetime
-    value: float
-    status: Optional[str] = None
+class ErrorModel(BaseModel):
+    id: str
+    datetime: datetime
+    machineID: int
+    errorID: str
 
-class SensorDataSchema(SensorDataBaseSchema):
-    id: int
+    class Config:
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.timestamp()
+        }
 
-class SensorDataCreateSchema(SensorDataBaseSchema):
-    pass
+class FailureModel(BaseModel):
+    id: str
+    datetime: datetime
+    machineID: int
+    failure: str
 
-class PredictionSchema(BaseModel):
-    prediction: int
+    class Config:
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.timestamp()
+        }
+
+
+class MachineModel(BaseModel):
+    id: str
+    machineID: int
+    model: str
+    age: int
+
+    class Config:
+        from_attributes = True
+
+class MaintenanceModel(BaseModel):
+    id: str
+    datetime: datetime
+    machineID: int
+    comp: str
+    
+    class Config:
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.timestamp()
+        }
+
+class TelemetryModel(BaseModel):
+    id: str
+    datetime: datetime
+    machineID: int
+    volt: Optional[float]
+    rotate: Optional[float]
+    pressure: Optional[float]
+    vibration: Optional[float]
+
+    class Config:
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.timestamp()
+        }
