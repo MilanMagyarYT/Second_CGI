@@ -2,39 +2,19 @@ import React, {useState, useMemo} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SensorPage.css';
 import SearchBar from './SearchBar'; // Import the Search Bar component
+import { ENDPOINTS } from './api';
+import axios from 'axios';
 
 
-// Mock sensor data - make sure to use this data in your component
-const mockSensorData = [
-  { id: 1, date: '2024-01-01T00:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-01T07:00:00', volt: '4.0', rotate: '1400', pressure: '100.0', vibration: '0.4', prediction: 'Pass', confidence: '92%' },
-  { id: 1, date: '2024-01-01T20:00:00', volt: '3.9', rotate: '1450', pressure: '99.5', vibration: '0.45', prediction: 'Pass', confidence: '85%' },
-  { id: 1, date: '2024-01-04T03:00:00', volt: '3.8', rotate: '1470', pressure: '100.8', vibration: '0.48', prediction: 'Pass', confidence: '88%' },
-  { id: 1, date: '2024-01-04T09:00:00', volt: '4.1', rotate: '1520', pressure: '101.0', vibration: '0.5', prediction: 'Pass', confidence: '91%' },
-  { id: 1, date: '2024-01-06T00:00:00', volt: '3.6', rotate: '1490', pressure: '100.9', vibration: '0.6', prediction: 'Pass', confidence: '93%' },
-  { id: 1, date: '2024-01-07T00:00:00', volt: '3.5', rotate: '1505', pressure: '102.0', vibration: '0.52', prediction: 'Pass', confidence: '87%' },
-  { id: 1, date: '2024-01-08T12:00:00', volt: '3.8', rotate: '1480', pressure: '101.4', vibration: '0.49', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-08T22:00:00', volt: '3.7', rotate: '1500', pressure: '101.2', vibration: '0.51', prediction: 'Pass', confidence: '89%' },
-  { id: 1, date: '2024-01-10T00:00:00', volt: '3.9', rotate: '1510', pressure: '101.6', vibration: '0.53', prediction: 'Pass', confidence: '94%' },
-  { id: 1, date: '2024-01-11T00:00:00', volt: '4.0', rotate: '1495', pressure: '101.1', vibration: '0.55', prediction: 'Pass', confidence: '95%' },
-  { id: 1, date: '2024-01-12T00:00:00', volt: '3.6', rotate: '1485', pressure: '100.6', vibration: '0.47', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-13T02:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-13T09:00:00', volt: '3.8', rotate: '1515', pressure: '102.1', vibration: '0.5', prediction: 'Pass', confidence: '88%' },
-  { id: 1, date: '2024-01-13T10:00:00', volt: '3.7', rotate: '1500', pressure: '101.5', vibration: '0.6', prediction: 'Pass', confidence: '86%' },
-  { id: 1, date: '2024-01-13T18:00:00', volt: '3.9', rotate: '1490', pressure: '101.3', vibration: '0.55', prediction: 'Pass', confidence: '87%' },
-  { id: 1, date: '2024-01-17T00:00:00', volt: '4.2', rotate: '1480', pressure: '101.7', vibration: '0.57', prediction: 'Pass', confidence: '85%' },
-  { id: 1, date: '2024-01-18T00:00:00', volt: '3.5', rotate: '1500', pressure: '100.5', vibration: '0.56', prediction: 'Pass', confidence: '82%' },
-  { id: 1, date: '2024-01-19T00:00:00', volt: '3.7', rotate: '1510', pressure: '101.8', vibration: '0.5', prediction: 'Pass', confidence: '91%' },
-  { id: 1, date: '2024-01-20T00:00:00', volt: '3.8', rotate: '1525', pressure: '101.0', vibration: '0.54', prediction: 'Pass', confidence: '93%' },
-  { id: 1, date: '2024-01-21T00:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-22T01:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-22T09:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-22T23:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-22T21:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  { id: 1, date: '2024-01-22T17:00:00', volt: '3.7', rotate: '1500', pressure: '101.3', vibration: '0.5', prediction: 'Pass', confidence: '90%' },
-  // You can continue expanding this pattern for more entries if needed...
-];
-
+// Function to fetch data from the backend
+const fetchData = async (endpoint) => {
+  const response = await fetch(endpoint);
+  if (!response.ok) {
+      throw new Error('Network response was not ok');
+  }
+  const data = await response.json();
+  return data;
+};
 
 
 function aggregateDataByDate(data) {
@@ -69,16 +49,45 @@ function aggregateDataByDate(data) {
 }
 
 function SensorPage() {
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10); 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const aggregatedData = useMemo(() => aggregateDataByDate(mockSensorData), []);
+
+  useEffect(() => {
+    const getData = async () => {
+        try {
+            setLoading(true);
+            const telemetryData = await fetchData(ENDPOINTS.TELEMETRY_ALL);
+            setData(telemetryData);
+            setFilteredData(telemetryData); // Initially display all data
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    getData();
+  }, []);
+
+  const handleSearch = (id) => {
+    const filtered = data.filter(sensor => sensor.machineID === id);
+    setFilteredData(filtered);
+    setCurrentPage(1); // Reset to first page when new search is done
+  };
+
+  const aggregatedData = useMemo(() => aggregateDataByDate(filteredData), [filteredData]);
+
 
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
-  const currentItems = mockSensorData.slice(firstItemIndex, lastItemIndex);
+  const currentItems = aggregatedData.slice(firstItemIndex, lastItemIndex);
 
-  const totalPages = Math.ceil(mockSensorData.length / itemsPerPage);
+  const totalPages = Math.ceil(aggregatedData.length / itemsPerPage);
 
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(Number(event.target.value));
@@ -94,12 +103,19 @@ function SensorPage() {
   };
 
   const goToSensorGraph = () => {
-    navigate('/sensor-graph', { state: { data: aggregatedData } }); // Use navigate to change the route
+    navigate('/sensor-graph', { state: { data: currentItems } }); // Use navigate to change the route
   };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <div className="sensor-page">
       <h1 className="page-title">Sensor List</h1>
-      <SearchBar />
+      <SearchBar onSearch={handleSearch} />
       <div className="sensor-list">
         <table className="sensor-table">
         <thead>
@@ -127,14 +143,14 @@ function SensorPage() {
             {/* Here you will map over your mock sensor data to create table rows */}
             {currentItems.map((sensor, index) => (
             <tr key={index} >
-                <td>{sensor.id}</td>
-                <td>{sensor.date}</td>
-                <td>{sensor.volt}</td>
-                <td>{sensor.rotate}</td>
-                <td>{sensor.pressure}</td>
-                <td>{sensor.vibration}</td>
-                <td>{sensor.prediction}</td>
-                <td>{sensor.confidence}</td>
+                <td>{sensor.machineID}</td>
+                <td>{sensor.datetime}</td>
+                <td>{sensor.volt.toFixed(2)}</td>
+                <td>{sensor.rotate.toFixed(2)}</td>
+                <td>{sensor.pressure.toFixed(2)}</td>
+                <td>{sensor.vibration.toFixed(2)}</td>
+                <td>Pass</td>
+                <td>90%</td>
               </tr>
             ))}
           </tbody>

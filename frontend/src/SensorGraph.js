@@ -35,6 +35,17 @@ function SensorGraph() {
       }
     }
 
+     // Render a message if data is empty or not provided
+     if (!data || data.length === 0) {
+      return (
+        <div className="sensor-graph-container">
+          <button onClick={goBack} className="go-back-button" autoFocus> &lt; Go Back</button>
+          <h1 className="page-title">Sensor Graph</h1>
+          <p>No data available to display the graph.</p>
+        </div>
+      );
+    }
+    
     return (
       <div className="sensor-graph-container">
         <button onClick={goBack} className="go-back-button" autoFocus> Go Back</button>
