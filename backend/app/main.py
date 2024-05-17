@@ -128,7 +128,7 @@ def get_vibration_by_machine_id_and_datetime(machine_id: int, date_time: str, db
     telemetry = db.query(Telemetry).filter(Telemetry.machineID == machine_id, Telemetry.datetime == datetime_obj).first()
     if telemetry is None:
         raise HTTPException(status_code=404, detail="Telemetry not found")
-    return {"vibration": float(telemetry.vibration)}
+    return {"vibration": float(telemetry.vibration)}   
 
 @app.get("/machines/{machine_id}/age")
 def get_machine_by_age(machine_id: int, db: Session = Depends(get_db)):
