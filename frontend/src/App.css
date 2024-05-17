@@ -5,11 +5,28 @@
 
 /* ... other styles ... */
 
-/* Add this new style for the content area */
 .App-content {
-  margin-left: 250px; /* Sidebar width */
-  margin-top: 60px; /* Navbar height */
-  height: calc(100vh - 60px); /* Full height minus navbar */
+  /* Remove the margin-left since there's no sidebar */
+  margin-top: 70px; /* Adjust if necessary to account for Navbar height */
+  height: calc(100vh - 70px); /* Adjust if necessary to account for Navbar height */
   overflow: auto;
-  /* Additional styles for your content area */
+
+  /* Centering the content horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: start; /* Use 'start' to align the content to the top */
+
+  /* If the content is not a single block, you may need to adjust the width */
+  width: 100%; /* You can set this to a fixed width if you want to limit the width of your content */
+
+  /* This ensures that if the content is less than the viewport height, it still centers vertically */
+}
+
+
+.background {
+  background-image: url('./public/5. Cornerstone pattern - gradiant B background.svg');
+  background-size: cover; /* Cover the entire space */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
 }

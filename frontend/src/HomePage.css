@@ -1,0 +1,21 @@
+.home {
+    padding: 20px;
+    background-color: #fff; /* White background for clarity */
+    color: #333; /* Darker text for readability */
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+  }
+  
+  .home h1 {
+    margin-bottom: 20px; /* Space below the header */
+  }
+  
+  .home p {
+    max-width: 600px; /* Optimal line length for readability */
+    text-align: center; /* Center align the text */
+    line-height: 1.6; /* Improve readability with more line spacing */
+  }
+  
