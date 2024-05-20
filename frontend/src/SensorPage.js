@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, { useState, useMemo, useEffect } from 'react'; // Added useEffect import
 import { useNavigate } from 'react-router-dom';
 import './SensorPage.css';
 import SearchBar from './SearchBar'; // Import the Search Bar component
